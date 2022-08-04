@@ -54,6 +54,20 @@ p {
 	font-family: var(--font-body);
 }
 
+a {
+	color: burlywood;
+	text-decoration: none;
+	transition: all 0.3s ease-in-out;
+}
+
+a:hover {
+	color: #0ec3ea !important;
+}
+
+a:visited {
+	color: burlywood;
+}
+
 @media (prefers-color-scheme: light) {
 	:root {
 		color: #213547;

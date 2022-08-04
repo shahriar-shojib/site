@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Typewriter from 'svelte-typewriter';
 	import image from './assets/image.jpg';
+	import Footer from './components/Footer.svelte';
 </script>
 
 <main>
@@ -10,7 +11,7 @@
 			<h1>Shahriar Shojib</h1>
 		</Typewriter>
 	</div>
-	<p>◕ ◡ ◕ っ Hi, I’m Shahriar! I’m a 26 y/o from Dhaka,Bangladesh passionate about technology and open source.</p>
+	<p>◕ ◡ ◕ っ Hi, I’m Shahriar! from Dhaka,Bangladesh passionate about technology and open source.</p>
 	<Typewriter mode="scramble" scrambleDuration={700} scrambleSlowdown={true}>
 		<p>
 			(┬┬﹏┬┬) I am currently building <a target="_blank" href="https://tixio.io">Tixio</a>
@@ -37,9 +38,19 @@
 	<p>Principal Software Engineer @ Tixio.io</p>
 	<h2>Previously</h2>
 	<p>Senior Software Engineer (Team Lead) @ Zaynax Limited</p>
+	<h2>Tools and Technologies I use</h2>
+	<p>
+		Node.js, MongoDB, Typescript, Nestjs, React, Jest, Go, Rust, Google Cloud, AWS, Github & Github Actions, Docker, NX,
+		SWC, Vite, Actix Web, Fiber
+	</p>
 </main>
+<Footer />
 
 <style>
+	:root {
+		--start-color: #7928ca;
+		--end-color: #ff0080;
+	}
 	div {
 		display: flex;
 		align-items: center;
@@ -57,17 +68,11 @@
 		filter: drop-shadow(0 0 2em #417f2dcd);
 	}
 
-	a {
-		color: burlywood;
-		text-decoration: none;
-		transition: all 0.3s ease-in-out;
-	}
-
-	a:hover {
-		color: #0ec3ea !important;
-	}
-
-	a:visited {
-		color: burlywood;
+	h1 {
+		background-clip: text;
+		-webkit-background-clip: text;
+		background-image: linear-gradient(90deg, var(--start-color), var(--end-color));
+		color: transparent;
+		user-select: none;
 	}
 </style>
