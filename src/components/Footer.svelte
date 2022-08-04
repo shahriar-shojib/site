@@ -36,7 +36,6 @@
 		margin-right: auto;
 	}
 	a {
-		color: #fff;
 		margin-right: 1em;
 		font-size: 1em;
 	}

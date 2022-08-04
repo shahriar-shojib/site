@@ -55,7 +55,7 @@ p {
 }
 
 a {
-	color: burlywood;
+	color: #2dff8f;
 	text-decoration: none;
 	transition: all 0.3s ease-in-out;
 }
@@ -65,7 +65,7 @@ a:hover {
 }
 
 a:visited {
-	color: burlywood;
+	color: #2dff8f;
 }
 
 @media (prefers-color-scheme: light) {
