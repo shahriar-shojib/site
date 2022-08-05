@@ -6,7 +6,6 @@
 	--font-title: 'Supreme-Bold';
 	--font-title-italic: 'Supreme-ExtraboldItalic';
 	--font-body: 'Supreme-Light';
-	--font-body-italic: 'Supreme-LightItalic';
 
 	font-family: var(--font-body), Avenir, Helvetica, Arial, sans-serif;
 	font-size: 16px;
@@ -66,17 +65,4 @@ a:hover {
 
 a:visited {
 	color: #2dff8f;
-}
-
-@media (prefers-color-scheme: light) {
-	:root {
-		color: #213547;
-		background-color: var(--background-light);
-	}
-	a:hover {
-		color: #747bff;
-	}
-	button {
-		background-color: #f9f9f9;
-	}
 }
