@@ -10,8 +10,9 @@ function Home() {
   const quote = useQuote()
   useReveal(() => root)
 
+  // On a phone the scene gets the first screen and the greeting peeks up from below it.
   return (
-    <section class="absolute bottom-0 left-0 max-w-[43rem] px-[6vw] pb-[11vh] [view-transition-name:home] max-sm:pb-10">
+    <section class="absolute bottom-0 left-0 max-w-[43rem] px-[6vw] pb-[11vh] [view-transition-name:home] max-sm:page-scroll max-sm:inset-0 max-sm:max-w-none max-sm:pb-10 max-sm:pt-[calc(100svh-6.5rem)]">
       <div ref={root} data-scene-avoid class="flex flex-col gap-[0.4em] text-[17.5px] leading-[1.5] max-sm:text-[15.5px]">
         <h1 data-reveal class="font-semibold opacity-0">
           {GREETING}

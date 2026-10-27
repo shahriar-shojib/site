@@ -66,7 +66,7 @@ body {
 }
 
 /* Long pages scroll the whole window and fade out under the masthead instead of colliding with it. */
-.page-scroll {
+@utility page-scroll {
   overflow-y: auto;
   scrollbar-width: none;
   mask-image: linear-gradient(to bottom, transparent 7.5rem, black 10.5rem);

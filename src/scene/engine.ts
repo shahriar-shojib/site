@@ -12,6 +12,8 @@ const AVOID = '[data-scene-avoid]'
 // The scene stays clear for CLEAR_PX around the text, then dissolves back in over FADE_PX.
 const CLEAR_PX = 24
 const FADE_PX = 130
+// Phones get a tighter fade so the scene isn't all fade.
+const FADE_SHARE = 0.16
 const CLEAR_SECONDS = 0.6
 // The grid moves things a whole cell at a time, so frames beyond 30 a second change nothing you can see.
 const FRAME_MS = 1000 / 30
@@ -29,6 +31,7 @@ export class SceneEngine {
   private creatures!: Creatures
   private avoid: Box[] = []
   private avoidKey = ''
+  private avoidRects: Box[] = []
   private clearFrom = new Float32Array(0)
   private clearTo = new Float32Array(0)
   private clearCells = new Int32Array(0)
@@ -115,39 +118,45 @@ export class SceneEngine {
 
   /** Clears the scene behind the text, easing between layouts when the page changes. */
   private measureContent(immediate = false) {
-    const boxes = this.contentBoxes()
+    const rects = this.contentRects()
+    const boxes = rects.map(this.clip)
     const key = boxes.map((b) => [b.left, b.top, b.right, b.bottom].map(Math.round).join()).join('|')
     if (!immediate && key === this.avoidKey) return
+    // Text that only scrolled keeps its clearing pinned to it; a new page eases in.
+    const follow = immediate || sameSizes(this.avoidRects, rects)
     this.avoidKey = key
+    this.avoidRects = rects
     this.avoid = boxes
     this.creatures.avoid = boxes
     this.clearFrom = this.painter.dim.slice()
     this.clearTo = this.clearing(boxes)
     this.clearCells = changedCells(this.clearFrom, this.clearTo)
-    this.clearT = immediate ? 1 : 0
-    if (!immediate) return
+    this.clearT = follow ? 1 : 0
+    if (!follow) return
     this.painter.dim.set(this.clearTo)
     this.painter.invalidate()
   }
 
-  /** Text boxes cut to the canvas edges, which changes nothing on screen but keeps a scrolling page from re-measuring. */
-  private contentBoxes(): Box[] {
+  private contentRects(): Box[] {
     const origin = this.canvas.getBoundingClientRect()
-    const { width, height } = this.grid
     return Array.from(document.querySelectorAll(AVOID), (el) => {
       const b = el.getBoundingClientRect()
-      return {
-        left: Math.max(0, b.left - origin.left),
-        top: Math.max(0, b.top - origin.top),
-        right: Math.min(width, b.right - origin.left),
-        bottom: Math.min(height, b.bottom - origin.top),
-      }
+      return { left: b.left - origin.left, top: b.top - origin.top, right: b.right - origin.left, bottom: b.bottom - origin.top }
     })
   }
 
+  /** Cuts a box to the canvas edges, which changes nothing on screen but keeps a tall scrolling page from re-measuring. */
+  private clip = (b: Box): Box => ({
+    left: Math.max(0, b.left),
+    top: Math.max(0, b.top),
+    right: Math.min(this.grid.width, b.right),
+    bottom: Math.min(this.grid.height, b.bottom),
+  })
+
   /** How much of the scene each cell keeps: none behind the text, all of it past the fade. */
   private clearing(boxes: Box[]) {
-    const { cols, rows, pitch } = this.grid
+    const { cols, rows, pitch, width } = this.grid
+    const fade = Math.min(FADE_PX, width * FADE_SHARE)
     const dim = new Float32Array(cols * rows)
     for (let cy = 0; cy < rows; cy++) {
       for (let cx = 0; cx < cols; cx++) {
@@ -159,7 +168,7 @@ export class SceneEngine {
           const dy = Math.max(b.top - y, 0, y - b.bottom)
           nearest = Math.min(nearest, dx * dx + dy * dy)
         }
-        dim[cy * cols + cx] = smoothstep(CLEAR_PX, CLEAR_PX + FADE_PX, Math.sqrt(nearest))
+        dim[cy * cols + cx] = smoothstep(CLEAR_PX, CLEAR_PX + fade, Math.sqrt(nearest))
       }
     }
     return dim
@@ -278,4 +287,9 @@ function changedCells(from: Float32Array, to: Float32Array) {
   const cells: number[] = []
   for (let i = 0; i < from.length; i++) if (from[i] !== to[i]) cells.push(i)
   return Int32Array.from(cells)
+}
+
+function sameSizes(a: Box[], b: Box[]) {
+  const size = (r: Box) => `${Math.round(r.right - r.left)}x${Math.round(r.bottom - r.top)}`
+  return a.length === b.length && a.every((r, i) => size(r) === size(b[i]))
 }
