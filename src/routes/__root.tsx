@@ -3,6 +3,7 @@ import { HydrationScript } from 'solid-js/web'
 import { Suspense } from 'solid-js'
 import { Site } from '../components/Site'
 
+import { SHARED_META } from '../seo'
 import styleCss from '../styles.css?url'
 
 // Rough guess for the first paint; the scene corrects it with real sunrise and sunset times.
@@ -14,7 +15,7 @@ export const Route = createRootRouteWithContext()({
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { title: 'Shahriar Shojib' },
-      { name: 'description', content: 'Principal engineer in Auckland.' },
+      ...SHARED_META,
     ],
     links: [
       { rel: 'stylesheet', href: styleCss },

@@ -1,6 +1,6 @@
 import { For, createSignal, onMount } from 'solid-js'
 import { animate, stagger } from 'motion'
-import { QUOTES, SOCIALS } from '../content'
+import { EMAIL, PHONE, QUOTES, SOCIALS } from '../content'
 import { A } from './A'
 
 /** Fades in every [data-reveal] element under the root, one after another, as the old page finishes fading out. */
@@ -27,19 +27,32 @@ export function QuoteLines(props: { lines: string[] }) {
   return <For each={props.lines}>{(line, i) => <>{i() > 0 && <br />}{line}</>}</For>
 }
 
+const QUIET_LINK = 'link opacity-70 hover:opacity-100'
+
 export function Socials(props: { class?: string }) {
   return (
-    <p data-reveal class={`opacity-0 ${props.class ?? ''}`}>
-      <For each={SOCIALS}>
-        {(s, i) => (
-          <>
-            {i() > 0 && <span class="opacity-40"> / </span>}
-            <A href={s.href} class="link opacity-70 hover:opacity-100">
-              {s.label}
-            </A>
-          </>
-        )}
-      </For>
-    </p>
+    <div data-reveal class={`flex flex-col gap-1 opacity-0 ${props.class ?? ''}`}>
+      <p>
+        <For each={SOCIALS}>
+          {(s, i) => (
+            <>
+              {i() > 0 && <span class="opacity-40"> / </span>}
+              <A href={s.href} download={s.download} class={QUIET_LINK}>
+                {s.label}
+              </A>
+            </>
+          )}
+        </For>
+      </p>
+      <p>
+        <a class={QUIET_LINK} href={`mailto:${EMAIL}`}>
+          {EMAIL}
+        </a>
+        <span class="opacity-40"> · </span>
+        <a class={`${QUIET_LINK} tabular-nums`} href={`tel:${PHONE.tel}`}>
+          {PHONE.label}
+        </a>
+      </p>
+    </div>
   )
 }

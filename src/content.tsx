@@ -10,10 +10,15 @@ export const QUOTES = [
   { lines: ['The best revenge', 'is not to become like them.'], ref: '6.6' },
 ]
 
+export const SITE = 'https://shojib.dev'
+export const NAME = 'Shahriar Shojib'
+export const EMAIL = 'shojib0@proton.me'
+export const PHONE = { label: '+64 22 100 4502', tel: '+64221004502' }
+
 export const SOCIALS = [
   { label: 'github', href: 'https://github.com/shahriar-shojib' },
   { label: 'linkedin', href: 'https://www.linkedin.com/in/shahriarshojib' },
-  { label: 'email', href: 'mailto:shojib0@proton.me' },
+  { label: 'cv', href: '/shahriar-shojib-cv.pdf', download: true },
 ]
 
 export const GREETING = "Kia ora, I'm Shojib."

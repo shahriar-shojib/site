@@ -2,8 +2,18 @@ import { createFileRoute } from '@tanstack/solid-router'
 import { For } from 'solid-js'
 import { QuoteLines, Socials, useQuote, useReveal } from '../components/bits'
 import { GREETING, INTRO } from '../content'
+import { seo } from '../seo'
 
-export const Route = createFileRoute('/')({ component: Home })
+export const Route = createFileRoute('/')({
+  head: () =>
+    seo({
+      path: '/',
+      title: 'Shahriar Shojib · Principal Engineer in Auckland',
+      description:
+        'Principal Engineer in Auckland. I build AI products, real-time collaboration and the servers they run on. Open to Senior and Staff roles.',
+    }),
+  component: Home,
+})
 
 function Home() {
   let root!: HTMLDivElement

@@ -3,9 +3,16 @@ import { For, type JSX } from 'solid-js'
 import { A } from '../components/A'
 import { Socials, useReveal } from '../components/bits'
 import { OPEN_SOURCE, WORK } from '../content'
+import { seo } from '../seo'
 
 export const Route = createFileRoute('/work')({
-  head: () => ({ meta: [{ title: 'Work · Shahriar Shojib' }] }),
+  head: () =>
+    seo({
+      path: '/work',
+      title: 'Work · Shahriar Shojib',
+      description:
+        'Where I have worked and what I built: AI products at Tixio and Vadio, an AI sales agent, football ticketing at 40k requests a second, and open source.',
+    }),
   component: Work,
 })
 
