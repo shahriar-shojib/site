@@ -37,7 +37,7 @@ export function Socials(props: { class?: string }) {
           {(s, i) => (
             <>
               {i() > 0 && <span class="opacity-40"> / </span>}
-              <A href={s.href} download={s.download} class={QUIET_LINK}>
+              <A href={s.href} class={QUIET_LINK}>
                 {s.label}
               </A>
             </>

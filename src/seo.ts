@@ -43,7 +43,7 @@ export const SHARED_META = [
       email: `mailto:${EMAIL}`,
       telephone: PHONE.tel,
       address: { '@type': 'PostalAddress', addressLocality: 'Auckland', addressCountry: 'NZ' },
-      sameAs: SOCIALS.filter((s) => s.href.startsWith('http')).map((s) => s.href),
+      sameAs: SOCIALS.filter((s) => !s.href.endsWith('.pdf')).map((s) => s.href),
     },
   },
 ]
