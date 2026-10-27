@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/solid-router'
-import { For } from 'solid-js'
+import { For, Show } from 'solid-js'
 import { QuoteLines, Socials, useQuote, useReveal } from '../components/bits'
 import { GREETING, INTRO } from '../content'
 import { seo } from '../seo'
@@ -39,7 +39,10 @@ function Home() {
           <p class="text-[16px] font-[350] leading-snug [font-style:oblique_10deg] max-sm:text-[15px]">
             <QuoteLines lines={quote().lines} />
           </p>
-          <p class="mt-3 text-[10.5px] uppercase tracking-[0.2em] opacity-50">Marcus Aurelius, Meditations {quote().ref}</p>
+          <Show when={quote().meaning}>
+            <p class="mt-1.5 text-[14px] leading-snug opacity-60 max-sm:text-[13.5px]">{quote().meaning}</p>
+          </Show>
+          <p class="mt-3 text-[10.5px] uppercase tracking-[0.2em] opacity-50">{quote().by}</p>
         </blockquote>
       </div>
     </section>

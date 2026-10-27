@@ -16,7 +16,7 @@ export function useReveal(root: () => HTMLElement) {
   })
 }
 
-/** A random Meditations quote, picked after hydration so the server and the client agree. */
+/** A random quote, picked after hydration so the server and the client agree. */
 export function useQuote() {
   const [quote, setQuote] = createSignal(QUOTES[0])
   onMount(() => setQuote(QUOTES[Math.floor(Math.random() * QUOTES.length)]))
