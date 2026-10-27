@@ -1,0 +1,96 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/afacad-flux/slnt.css';
+@import '@fontsource/special-gothic-expanded-one/400.css';
+
+@theme {
+  --font-sans: 'Afacad Flux Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Special Gothic Expanded One', 'Afacad Flux Variable', ui-sans-serif, sans-serif;
+}
+
+:root {
+  --bg: rgb(250 248 242);
+  --fg: rgb(12 12 16);
+  color-scheme: light;
+}
+
+:root.night {
+  --bg: rgb(4 4 9);
+  --fg: rgb(246 244 238);
+  color-scheme: dark;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  overscroll-behavior: none;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  transition:
+    background-color 1.6s ease,
+    color 1.6s ease;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--fg) 85%, transparent);
+  color: var(--bg);
+}
+
+.link {
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--fg) 35%, transparent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  transition: text-decoration-color 150ms;
+}
+
+.link:hover,
+.link:focus-visible {
+  text-decoration-color: var(--fg);
+  outline: none;
+}
+
+.nav a {
+  opacity: 0.5;
+  transition: opacity 150ms;
+}
+
+.nav a:hover,
+.nav a:focus-visible,
+.nav a[aria-current='page'] {
+  opacity: 1;
+  outline: none;
+}
+
+/* Long pages scroll the whole window and fade out under the masthead instead of colliding with it. */
+.page-scroll {
+  overflow-y: auto;
+  scrollbar-width: none;
+  mask-image: linear-gradient(to bottom, transparent 7.5rem, black 10.5rem);
+}
+
+/* On a page change the scene and masthead hold still: the old page fades out and the new one reveals itself. */
+::view-transition-group(*),
+::view-transition-old(*),
+::view-transition-new(*) {
+  animation: none;
+}
+
+::view-transition-old(*):only-child {
+  animation: page-out 180ms ease-out both;
+}
+
+@keyframes page-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*):only-child {
+    animation: none;
+  }
+}

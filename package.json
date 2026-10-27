@@ -1,25 +1,27 @@
 {
-  "name": "site",
+  "name": "shojib.dev",
   "private": true,
-  "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite dev --port 3000",
+    "generate-routes": "tsr generate",
     "build": "vite build",
-    "preview": "vite preview",
-    "check": "svelte-check --tsconfig ./tsconfig.json"
-  },
-  "devDependencies": {
-    "@sveltejs/vite-plugin-svelte": "^1.0.1",
-    "@tsconfig/svelte": "^3.0.0",
-    "svelte": "^3.49.0",
-    "svelte-check": "^2.8.0",
-    "svelte-preprocess": "^4.10.7",
-    "tslib": "^2.4.0",
-    "typescript": "^4.6.4",
-    "vite": "^3.0.0"
+    "preview": "vite preview"
   },
   "dependencies": {
-    "svelte-typewriter": "^3.0.1"
+    "@fontsource-variable/afacad-flux": "^5.3.0",
+    "@fontsource/special-gothic-expanded-one": "^5.3.0",
+    "@tailwindcss/vite": "^4.3.3",
+    "@tanstack/solid-router": "1.170.43",
+    "@tanstack/solid-start": "1.169.4",
+    "motion": "^14.6.0",
+    "solid-js": "^1.9.17",
+    "tailwindcss": "^4.3.3"
+  },
+  "devDependencies": {
+    "@tanstack/router-cli": "^1.167.46",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.5",
+    "vite-plugin-solid": "^2.11.14"
   }
 }
