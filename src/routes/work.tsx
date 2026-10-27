@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/solid-router'
 import { For, type JSX } from 'solid-js'
-import { A } from '../components/A'
 import { Socials, useReveal } from '../components/bits'
+import { Peek } from '../components/Peek'
 import { OPEN_SOURCE, WORK } from '../content'
 import { seo } from '../seo'
 
@@ -47,11 +47,7 @@ function Work() {
           <For each={WORK}>
             {(w) => (
               <Row aside={w.years}>
-                <h3 class="text-[16.5px] font-semibold">
-                  <A href={w.href}>{w.place}</A>
-                  <span class="font-normal opacity-60"> · {w.role}</span>
-                </h3>
-                <p class="mt-1 text-[15.5px] leading-[1.55] opacity-85">{w.text}</p>
+                <Peek label={w.place} href={w.href} suffix={w.role} text={w.text} card={w.card} />
               </Row>
             )}
           </For>
@@ -60,10 +56,7 @@ function Work() {
           <For each={OPEN_SOURCE}>
             {(o) => (
               <Row aside={o.role}>
-                <h3 class="text-[16.5px] font-semibold">
-                  <A href={o.href}>{o.name}</A>
-                </h3>
-                <p class="mt-1 text-[15.5px] leading-[1.55] opacity-85">{o.text}</p>
+                <Peek label={o.name} href={o.href} text={o.text} card={o.card} />
               </Row>
             )}
           </For>
