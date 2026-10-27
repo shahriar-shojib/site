@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/solid-router'
-import { For, Show } from 'solid-js'
-import { QuoteLines, Socials, useQuote, useReveal } from '../components/bits'
-import { GREETING, INTRO } from '../content'
+import { For } from 'solid-js'
+import { QuoteLines, Socials, useReveal } from '../components/bits'
+import { GREETING, INTRO, QUOTE } from '../content'
 import { seo } from '../seo'
 
 export const Route = createFileRoute('/')({
@@ -17,7 +17,6 @@ export const Route = createFileRoute('/')({
 
 function Home() {
   let root!: HTMLDivElement
-  const quote = useQuote()
   useReveal(() => root)
 
   // On a phone the scene gets the first screen and the greeting peeks up from below it.
@@ -37,12 +36,9 @@ function Home() {
         <Socials class="mt-3 text-[14.5px]" />
         <blockquote data-reveal class="mt-9 opacity-0 max-sm:mt-6">
           <p class="text-[16px] font-[350] leading-snug [font-style:oblique_10deg] max-sm:text-[15px]">
-            <QuoteLines lines={quote().lines} />
+            <QuoteLines lines={QUOTE.lines} />
           </p>
-          <Show when={quote().meaning}>
-            <p class="mt-1.5 text-[14px] leading-snug opacity-60 max-sm:text-[13.5px]">{quote().meaning}</p>
-          </Show>
-          <p class="mt-3 text-[10.5px] uppercase tracking-[0.2em] opacity-50">{quote().by}</p>
+          <p class="mt-3 text-[10.5px] uppercase tracking-[0.2em] opacity-50">{QUOTE.by}</p>
         </blockquote>
       </div>
     </section>

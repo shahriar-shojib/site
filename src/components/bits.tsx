@@ -1,6 +1,6 @@
-import { For, createSignal, onMount } from 'solid-js'
+import { For, onMount } from 'solid-js'
 import { animate, stagger } from 'motion'
-import { EMAIL, PHONE, QUOTES, SOCIALS } from '../content'
+import { EMAIL, PHONE, SOCIALS } from '../content'
 import { A } from './A'
 
 /** Fades in every [data-reveal] element under the root, one after another, as the old page finishes fading out. */
@@ -14,13 +14,6 @@ export function useReveal(root: () => HTMLElement) {
       { duration: 0.7, delay: stagger(0.05, { startDelay: 0.16 }), ease: [0.22, 1, 0.36, 1] },
     )
   })
-}
-
-/** A random quote, picked after hydration so the server and the client agree. */
-export function useQuote() {
-  const [quote, setQuote] = createSignal(QUOTES[0])
-  onMount(() => setQuote(QUOTES[Math.floor(Math.random() * QUOTES.length)]))
-  return quote
 }
 
 export function QuoteLines(props: { lines: string[] }) {

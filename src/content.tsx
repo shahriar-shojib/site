@@ -1,26 +1,7 @@
 import type { JSX } from 'solid-js'
 import { A } from './components/A'
 
-export interface Quote {
-  lines: string[]
-  /** An English reading under lines that aren't in English. */
-  meaning?: string
-  by: string
-}
-
-export const QUOTES: Quote[] = [
-  { lines: ['If you shut your door to all errors,', 'truth will be shut out.'], by: 'Rabindranath Tagore, Stray Birds' },
-  {
-    lines: ['Ehara taku toa i te toa takitahi,', 'engari he toa takitini.'],
-    meaning: 'My strength is not that of one, but that of many.',
-    by: 'Whakataukī',
-  },
-  {
-    lines: ['Perfection is reached not when there is nothing left to add,', 'but when there is nothing left to take away.'],
-    by: 'Antoine de Saint-Exupéry, Wind, Sand and Stars',
-  },
-  { lines: ['The first principle is that you must not fool yourself,', 'and you are the easiest person to fool.'], by: 'Richard Feynman' },
-]
+export const QUOTE = { lines: ['What stands in the way', 'becomes the way.'], by: 'Marcus Aurelius' }
 
 export const SITE = 'https://shojib.dev'
 export const NAME = 'Shahriar Shojib'
